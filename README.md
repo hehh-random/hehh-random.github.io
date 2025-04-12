@@ -17,6 +17,8 @@
       margin: 0;
       text-align: center;
       padding: 20px;
+      overflow: hidden;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     h1 {
@@ -34,6 +36,7 @@
       border-radius: 15px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       margin-bottom: 20px;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     #counter {
@@ -56,6 +59,50 @@
     #tapBtn:hover {
       background-color: #d81b60;
     }
+
+    /* Falling elements */
+    .falling {
+      position: absolute;
+      top: -50px;
+      font-size: 24px;
+      pointer-events: none;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Night Mode Styles */
+    .night-mode {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .night-mode #message {
+      background-color: #444;
+      color: #fff;
+    }
+
+    .night-mode #tapBtn {
+      background-color: #333;
+      color: #e91e63;
+    }
+
+    .night-mode #tapBtn:hover {
+      background-color: #555;
+    }
+
+    .night-mode h1 {
+      color: #ff4081;
+    }
   </style>
 </head>
 <body>
@@ -64,6 +111,24 @@
   <div id="message">Tap the button to see a message...</div>
   <div id="counter">You have tapped 0 out of 100 times.</div>
   <button id="tapBtn">Tap Me 💖</button>
+  <button id="nightModeBtn" style="margin-top: 20px; padding: 10px 20px; background-color: #333; color: #fff; border: none; border-radius: 30px; cursor: pointer;">Night Mode</button>
+
+  <!-- Falling elements: stars, hearts, spiderwebs -->
+  <script>
+    const symbols = ["🌚", "🕷", "🕸️"];
+    const count = 40;
+
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement("div");
+      el.className = "falling";
+      el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      el.style.left = `${Math.random() * 100}vw`;
+      el.style.animationDuration = `${4 + Math.random() * 6}s`;
+      el.style.animationDelay = `${Math.random() * 5}s`;
+      el.style.fontSize = `${18 + Math.random() * 20}px`;
+      document.body.appendChild(el);
+    }
+  </script>
 
   <script>
     const messages = [
@@ -169,9 +234,7 @@
       "Tum mere liye priceless ho ",
       "Tumhara naam se hi hass deti hu ",
       "Tum meri aakhri aur sabse khoobsurat love story ho ",
-      
     ];
-     // Final 100th message
     messages.push(" LOVE YOUUU BKL😏🫶 uhmm kesaa lagaa sir jiii ");
 
     let index = 0;
@@ -187,6 +250,17 @@
         if (index === messages.length) {
           btn.style.display = "none";
         }
+      }
+    });
+
+    // Night Mode Toggle
+    const nightModeBtn = document.getElementById("nightModeBtn");
+    nightModeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("night-mode");
+      if (document.body.classList.contains("night-mode")) {
+        nightModeBtn.textContent = "Light Mode";
+      } else {
+        nightModeBtn.textContent = "Night Mode";
       }
     });
   </script>
