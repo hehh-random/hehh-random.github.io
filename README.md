@@ -109,7 +109,7 @@
 
   <h1>Tap to Reveal the message 💞</h1>
   <div id="message">Tap the button to see a message...</div>
-  <div id="counter">You have tapped 0 out of 100 times.</div>
+  <div id="counter">You have tapped 0 out of 103 times.</div>
   <button id="tapBtn">Tap Me 💖</button>
   <button id="nightModeBtn" style="margin-top: 20px; padding: 10px 20px; background-color: #333; color: #fff; border: none; border-radius: 30px; cursor: pointer;">Night Mode</button>
 
